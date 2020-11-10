@@ -39,7 +39,9 @@ def compute_info_gain(data, att_name, y_name):
     #========================#
     # STRART YOUR CODE HERE  #
     #========================#
-
+    info_gain = compute_entropy(data[y_name])
+    for v, count in zip(vals, counts):
+        info_gain -= count / total_counts * compute_entropy(data[data[att_name] == v][y_name])
     #========================#
     #   END YOUR CODE HERE   #
     #========================# 
@@ -58,7 +60,7 @@ def comput_gain_ratio(data, att_name, y_name):
     #========================#
     # STRART YOUR CODE HERE  #
     #========================#
-
+    att_info = compute_entropy(data[att_name])
     #========================#
     #   END YOUR CODE HERE   #
     #========================# 
@@ -90,7 +92,7 @@ class DecisionTree(object):
             #========================#
             # STRART YOUR CODE HERE  #
             #========================#
-
+            leaf_value = np.unique(data[self.y_name])
             #========================#
             #   END YOUR CODE HERE   #
             #========================# 

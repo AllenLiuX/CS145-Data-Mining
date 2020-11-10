@@ -31,6 +31,8 @@ def linear_kernel(X, Y=None):
     #========================#
     # STRART YOUR CODE HERE  #
     #========================#
+    kernel_matrix = X @ Y.T
+
     #========================#
     #   END YOUR CODE HERE   #
     #========================# 
@@ -45,31 +47,47 @@ def polynomial_kernel(X, Y=None, degree=3):
     #========================#
     # STRART YOUR CODE HERE  #
     #========================#
+    kernel_matrix = (X @ Y.T + 1) ** degree
+
     #========================#
     #   END YOUR CODE HERE   #
     #========================# 
     return kernel_matrix
+#
+# def gaussian_kernel(X, Y=None, sigma=5.0):
+#     Y = X if Y is None else Y
+#     m = X.shape[0]
+#     n = Y.shape[0]
+#     assert X.shape[1] == Y.shape[1]
+#     kernel_matrix = np.zeros((m, n))
+#     #========================#
+#     # STRART YOUR CODE HERE  #
+#     #========================#
+#     for i in range(m):
+#         for j in range(n):
+#             kernel_matrix[i][j] = gaussian_kernel_point(X[i], Y[j])
+#
+#     #========================#
+#     #   END YOUR CODE HERE   #
+#     #========================#
+#     return kernel_matrix
 
+
+# Bonus question: vectorized implementation of Gaussian kernel
+# If you decide to do the bonus question, comment the gaussian_kernel function above,
+# then implement and uncomment this one.
 def gaussian_kernel(X, Y=None, sigma=5.0):
     Y = X if Y is None else Y
     m = X.shape[0]
     n = Y.shape[0]
     assert X.shape[1] == Y.shape[1]
     kernel_matrix = np.zeros((m, n))
-    #========================#
-    # STRART YOUR CODE HERE  #
-    #========================#
-    #========================#
-    #   END YOUR CODE HERE   #
-    #========================# 
+
+    # print(X[:5])
+    dist = np.linalg.norm(X[:, np.newaxis, :] - Y[np.newaxis, :, :], axis=-1)
+    # print(dist)
+    kernel_matrix = np.exp(-dist**2 / (2 * sigma ** 2))
     return kernel_matrix
-
-
-# Bonus question: vectorized implementation of Gaussian kernel
-# If you decide to do the bonus question, comment the gaussian_kernel function above,
-# then implement and uncomment this one.
-# def gaussian_kernel(X, Y=None, sigma=5.0):
-#     return 
 
 class SVM(object):
     def __init__(self):
@@ -110,6 +128,8 @@ class SVM(object):
             #========================#
             # STRART YOUR CODE HERE  #
             #========================#
+            predicted_y = X @ self.w.T + self.b
+            # print(predicted_y)
             #========================#
             #   END YOUR CODE HERE   #
             #========================# 
@@ -121,6 +141,10 @@ class SVM(object):
             #========================#
             # STRART YOUR CODE HERE  #
             #========================#
+            for i in range(n):
+                prod = np.expand_dims(self.a * self.sv_y, axis=-1)
+                x = np.expand_dims(X[i], axis=-1)
+                predicted_y[i] = np.sum(prod * self.kernel(self.sv, x.T)) + self.b
             #========================#
             #   END YOUR CODE HERE   #
             #========================# 
