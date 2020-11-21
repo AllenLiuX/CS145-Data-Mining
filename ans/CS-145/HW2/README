@@ -1,0 +1,31 @@
+(This is an updated README with included file descriptions, and high-level implementation details)
+	
+****************************************************************************
+
+DecisionTree:
+
+Code File: DecisionTree.py
+
+Implementation Details:
+1) The information gain was calculated using the Total Entropy - Conditional Entropy formulas provided in class and discussion.
+2) The gain ratio was derived from the information gain, and takes the size and number of branches into account.
+
+How to Run:
+* Run python DecisionTree.py arg1, where arg1 refers to splitting factor: 0 for information gain, and 1 for gain ratio.
+Example: python DecisionTree.py 0
+
+The decision tree and the different features used are given in sequence, along with accuracy of the decision tree on the test data.
+
+****************************************************************************
+
+SVM:
+
+Code File: svm.py
+
+Implementation Details:
+1) The linear_kernel was calculated using equation = X . X_T
+2) For the linear case, the prediction is straightforward (w . x + b). For the non-linear case, the value of X is first translated using _kernel_point (gaussian or polynomial). Then all Lagrange multipliers and support vectors are multiplied to the kernel_point value. The sum of these products is the prediction.
+
+How to Run:
+* run python svm.py arg1 arg2, where arg1 refers to margin type (0 = hard, 1 = soft) and arg2 refers to type of kernel (0 = linear, 1 = polynomial, 2 = gaussian).
+Example: python svm.py 0 0

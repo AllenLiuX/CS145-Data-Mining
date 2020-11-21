@@ -1,0 +1,43 @@
+(This is an updated README with included file descriptions, and high-level implementation details)
+
+Libraries required:
+* pandas
+* numpy
+* scikit-learn
+	
+****************************************************************************
+
+LinearRegression:
+
+Code File: linearRegression.py
+
+Implementation Details:
+1) The closed-form solution approach was coded directly using the formula and internal libraries such as np and functions such as dot(), transpose(), etc.
+2) The batch gradient descent approach calculates the descent in each iteration from 1 to n, with the formula = x(i) * x(i).transpose() * beta - y(i), and finally divides by n to update the value of beta.
+3) The stochastic gradient descent approach does the same with its own formula of updating the beta.
+
+How to Run:
+* If folder “output” does not exist in the LinearRegression folder, please create one before running the code
+* Run python linearRegression.py arg1 arg2, where arg1 refers to learning algorithm type and arg2 refers to whether normalization is applied.
+Example: python linearRegression.py 0 0 
+
+The output text files storing predicted y values will be in the “output” folder.
+
+****************************************************************************
+
+LogisticRegression Folder:
+
+Code File: logisticRegression.py
+
+Implementation Details:
+1) The functions use the sigmoid function for fitting, and for preventing overflow of values.
+2) The Netwon Raphson formula approach uses the Hessian matrix to update values of beta. This formula was extracted from post #50 on Piazza.
+3) The regularization is based on the derivation of the formula provided in the question sheet. The only significant addition is the summation over Beta(j) which adds a 2 * lambda * beta[j] to the first derivative.
+
+How to Run:
+* run python logisticRegression.py arg1 arg2, where arg1 refers to learning algorithm type and arg2 refers to whether normalization is applied.
+Example: python logisticRegression.py 0 0
+
+The number 2 was added to the arguments for Regularized Batch Gradient Descent.
+
+The output text files storing predicted y values will be in the “output” folder.
